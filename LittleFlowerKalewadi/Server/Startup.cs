@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Linq;
+using System.IO;
 using System.Security.Cryptography.X509Certificates;
 
 namespace LittleFlowerKalewadi.Server
@@ -50,9 +50,12 @@ namespace LittleFlowerKalewadi.Server
             // Fallback to local file for development
             if (cert == null)
             {
-                //cert = new X509Certificate2(Path.Combine(_env.ContentRootPath, "example.pfx"), new System.Security.SecureString("exportpassword"));
+                cert = new X509Certificate2("c:\\temp\\lfps.pfx", "Up22mlFF");
                 //Log.Logger.Information($"Falling back to cert from file. Successfully loaded: {cert.Thumbprint}");
             }
+
+            //string path = Path.Combine(Directory.GetCurrentDirectory(), "db");
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
