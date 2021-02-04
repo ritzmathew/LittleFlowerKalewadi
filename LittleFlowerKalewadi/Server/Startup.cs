@@ -50,11 +50,10 @@ namespace LittleFlowerKalewadi.Server
             // Fallback to local file for development
             if (cert == null)
             {
-                cert = new X509Certificate2("c:\\temp\\lfps.pfx", "Up22mlFF");
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "lfps.pfx");
+                cert = new X509Certificate2(path, "Up22mlFF");
                 //Log.Logger.Information($"Falling back to cert from file. Successfully loaded: {cert.Thumbprint}");
             }
-
-            //string path = Path.Combine(Directory.GetCurrentDirectory(), "db");
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
