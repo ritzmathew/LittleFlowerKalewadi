@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace LittleFlowerKalewadi.Server
 {
@@ -29,6 +30,29 @@ namespace LittleFlowerKalewadi.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            X509Certificate2 cert = null;
+            using (X509Store certStore = new X509Store(StoreName.My, StoreLocation.CurrentUser))
+            {
+                certStore.Open(OpenFlags.ReadOnly);
+                X509Certificate2Collection certCollection = certStore.Certificates.Find(
+                    X509FindType.FindByThumbprint,
+                    // Replace below with your cert's thumbprint
+                    "026DB67476FFE82DF5345CBC56D70B0160964C06",
+                    false);
+                // Get the first cert with the thumbprint
+                if (certCollection.Count > 0)
+                {
+                    cert = certCollection[0];
+                    //Log.Logger.Information($"Successfully loaded cert from registry: {cert.Thumbprint}");
+                }
+            }
+
+            // Fallback to local file for development
+            if (cert == null)
+            {
+                //cert = new X509Certificate2(Path.Combine(_env.ContentRootPath, "example.pfx"), new System.Security.SecureString("exportpassword"));
+                //Log.Logger.Information($"Falling back to cert from file. Successfully loaded: {cert.Thumbprint}");
+            }
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -37,6 +61,7 @@ namespace LittleFlowerKalewadi.Server
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddIdentityServer()
+                .AddSigningCredential(cert)
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
             services.AddAuthentication()
