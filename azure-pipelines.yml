@@ -29,7 +29,7 @@ variables:
   testProjects: "**/*[Tt]est*/*.csproj"
 
   # Dotnet Core Version
-  dotnetCoreVersion: 2.x
+  dotnetCoreVersion: 3.x
   
 stages:
 - stage: Build
