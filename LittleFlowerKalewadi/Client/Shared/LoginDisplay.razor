@@ -6,12 +6,15 @@
 
 <AuthorizeView>
     <Authorized>
-        <a href="authentication/profile">Hello, @context.User.Identity.Name!</a>
-        <button class="nav-link btn btn-link" @onclick="BeginSignOut">Log out</button>
+        <div class="login">
+            <a href="authentication/profile"><i class="fa fa-user" aria-hidden="true"></i> <span>Logged in as @context.User.Identity.Name</span></a>            
+            <a href="#" @onclick="BeginSignOut"><i class="fa fa-sign-out" aria-hidden="true"></i> <span>Log out</span></a>
+        </div>
     </Authorized>
     <NotAuthorized>
         <div class="login">
-            <a href="authentication/login"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
+            <a href="authentication/login"><i class="fa fa-sign-in" aria-hidden="true"></i> <span>Login</span></a>
+            <a href="authentication/register"><i class="fa fa-user" aria-hidden="true"></i> <span>Register</span></a>
         </div>
         @* <a href="authentication/register">Register</a>
         <a href="authentication/login">Log in</a> *@
