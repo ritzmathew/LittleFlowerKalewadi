@@ -31,26 +31,31 @@ namespace LittleFlowerKalewadi.Server
         public void ConfigureServices(IServiceCollection services)
         {
             X509Certificate2 cert = null;
-            using (X509Store certStore = new X509Store(StoreName.My, StoreLocation.CurrentUser))
-            {
-                certStore.Open(OpenFlags.ReadOnly);
-                X509Certificate2Collection certCollection = certStore.Certificates.Find(
-                    X509FindType.FindByThumbprint,
-                    // Replace below with your cert's thumbprint
-                    "026DB67476FFE82DF5345CBC56D70B0160964C06",
-                    false);
-                // Get the first cert with the thumbprint
-                if (certCollection.Count > 0)
-                {
-                    cert = certCollection[0];
-                    //Log.Logger.Information($"Successfully loaded cert from registry: {cert.Thumbprint}");
-                }
-            }
+            // using (X509Store certStore = new X509Store(StoreName.My, StoreLocation.CurrentUser))
+            // {
+            //     certStore.Open(OpenFlags.ReadOnly);
+            //     X509Certificate2Collection certCollection = certStore.Certificates.Find(
+            //         X509FindType.FindByThumbprint,
+            //         // Replace below with your cert's thumbprint
+            //         "026DB67476FFE82DF5345CBC56D70B0160964C06",
+            //         false);
+            //     // Get the first cert with the thumbprint
+            //     if (certCollection.Count > 0)
+            //     {
+            //         cert = certCollection[0];
+            //         //Log.Logger.Information($"Successfully loaded cert from registry: {cert.Thumbprint}");
+            //     }
+            // }
 
             // Fallback to local file for development
             if (cert == null)
             {
                 string path = Path.Combine(Directory.GetCurrentDirectory(), "lfps.pfx");
+                string azPath = Path.Combine("D:", "home", "site", "wwwroot", "wwwroot", "lfps.pfx");
+                if(File.Exists(azPath)) {
+                    path = azPath;
+                }
+                //string path = Path.Combine(Directory.GetCurrentDirectory(), "lfps.pfx");
                 cert = new X509Certificate2(path, "Up22mlFF");
                 //Log.Logger.Information($"Falling back to cert from file. Successfully loaded: {cert.Thumbprint}");
             }
