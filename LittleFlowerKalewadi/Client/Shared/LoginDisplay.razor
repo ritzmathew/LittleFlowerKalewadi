@@ -10,8 +10,11 @@
         <button class="nav-link btn btn-link" @onclick="BeginSignOut">Log out</button>
     </Authorized>
     <NotAuthorized>
-        <a href="authentication/register">Register</a>
-        <a href="authentication/login">Log in</a>
+        <div class="login">
+            <a href="authentication/login"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
+        </div>
+        @* <a href="authentication/register">Register</a>
+        <a href="authentication/login">Log in</a> *@
     </NotAuthorized>
 </AuthorizeView>
 

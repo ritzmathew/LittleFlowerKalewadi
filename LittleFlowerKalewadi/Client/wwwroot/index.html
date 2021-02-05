@@ -7,22 +7,34 @@
     <title>LittleFlowerKalewadi</title>
     <base href="/" />
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/app.css" rel="stylesheet" />
+    <!-- <link href="css/app.css" rel="stylesheet" /> -->
+    <link href="style.css" rel="stylesheet" />
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
 </head>
 
 <body>
-    <app>Loading...</app>
-
-    <div id="blazor-error-ui">
-        An unhandled error has occurred.
-        <a href="" class="reload">Reload</a>
-        <a class="dismiss">🗙</a>
-    </div>
+    <app>
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img">
+                <img src="img/core-img/logo-min.png" alt="">
+            </div>
+        </div>
+    </app>   
     <script src="_content/Microsoft.AspNetCore.Components.WebAssembly.Authentication/AuthenticationService.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
+    <!-- jQuery-2.2.4 js -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/bootstrap/popper.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
 </body>
 
 </html>

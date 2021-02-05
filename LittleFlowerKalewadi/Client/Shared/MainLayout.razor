@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="sidebar">
+@* <div class="sidebar">
     <NavMenu />
 </div>
 
@@ -13,4 +13,268 @@
     <div class="content px-4">
         @Body
     </div>
+</div> *@
+
+<div>
+<!-- ##### Header Area Start ##### -->
+<header class="header-area">
+    <!-- ***** Top Header Area ***** -->
+    <div class="top-header-area" style="background-color: black">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="top-header-content d-flex align-items-center justify-content-between">
+                        <!-- Top Header Content -->
+                        <div class="top-header-meta">
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="@info.EMail"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span>@info.EMail</span></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="@info.PhoneNumber"><i class="fa fa-phone" aria-hidden="true"></i> <span>@info.PhoneNumber</span></a>
+                        </div>
+
+                        <!-- Top Header Content -->
+                        <div class="top-header-meta d-flex">
+                            <!-- Language Dropdown -->
+                            @* <div class="language-dropdown">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle mr-30" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language</button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">USA</a>
+                                        <a class="dropdown-item" href="#">UK</a>
+                                        <a class="dropdown-item" href="#">Bangla</a>
+                                        <a class="dropdown-item" href="#">Hindi</a>
+                                        <a class="dropdown-item" href="#">Spanish</a>
+                                        <a class="dropdown-item" href="#">Latin</a>
+                                    </div>
+                                </div>
+                            </div> *@
+                            <LoginDisplay />
+                            <!-- Login -->
+                            @* <div class="login">
+                                <a href="#"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
+                            </div> *@
+                            <!-- Cart -->
+                            @* <div class="cart">
+                                <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <span>Cart <span class="cart-quantity">(1)</span></span></a>
+                            </div> *@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ***** Navbar Area ***** -->
+    <div class="alazea-main-menu" style="background-color: rgba(9, 46, 90, 0.8)">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+                <!-- Menu -->
+                <nav class="classy-navbar justify-content-between" id="alazeaNav">
+
+                    <!-- Nav Brand -->
+                    <a href="/" class="nav-brand"><img src="img/core-img/logo.png" alt=""></a>
+
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="classy-menu">
+
+                        <!-- Close Button -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <!-- Navbar Start -->
+                        <div class="classynav">
+                            <ul>
+                                <li><a href="/">Home</a></li>
+                                <li><a href="#">About</a></li>
+                                @* <li><a href="#">Pages</a>
+                                    <ul class="dropdown">
+                                        <li><a href="/">Home</a></li>
+                                        <li><a href="/">About</a></li>
+                                        <li><a href="shop.html">Shop</a>
+                                            <ul class="dropdown">
+                                                <li><a href="shop.html">Shop</a></li>
+                                                <li><a href="shop-details.html">Shop Details</a></li>
+                                                <li><a href="cart.html">Shopping Cart</a></li>
+                                                <li><a href="checkout.html">Checkout</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="portfolio.html">Portfolio</a>
+                                            <ul class="dropdown">
+                                                <li><a href="portfolio.html">Portfolio</a></li>
+                                                <li><a href="single-portfolio.html">Portfolio Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="blog.html">Blog</a>
+                                            <ul class="dropdown">
+                                                <li><a href="blog.html">Blog</a></li>
+                                                <li><a href="single-post.html">Blog Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="shop.html">Shop</a></li>
+                                <li><a href="portfolio.html">Portfolio</a></li> *@
+                                <li><a href="enquiryForm">Contact</a></li>
+                            </ul>
+
+                            <!-- Search Icon -->
+                            <div id="searchIcon">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </div>
+
+                        </div>
+                        <!-- Navbar End -->
+                    </div>
+                </nav>
+
+                <!-- Search Form -->
+                <div class="search-form">
+                    <form action="#" method="get">
+                        <input type="search" name="search" id="search" placeholder="Type keywords &amp; press enter...">
+                        <button type="submit" class="d-none"></button>
+                    </form>
+                    <!-- Close Icon -->
+                    <div class="closeIcon"><i class="fa fa-times" aria-hidden="true"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ##### Header Area End ##### -->
+
+@Body
+
+<!-- ##### Footer Area Start ##### -->
+<footer class="footer-area bg-img" style="background-image: url(img/bg-img/3.jpg);">
+    <!-- Main Footer Area -->
+    <div class="main-footer-area">
+        <div class="container">
+            <div class="row">
+
+                <!-- Single Footer Widget -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-footer-widget">
+                        <div class="footer-logo mb-30">
+                            <a href="/"><img src="img/core-img/logo.png" alt=""></a>
+                        </div>
+                        <p>Follow our socials!</p>
+                        <div class="social-info">
+                            <a href="https://www.facebook.com/LittleflowerKalewadi"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="/"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="/"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                            <a href="/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                            <a href="/"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Footer Widget -->
+                @* <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-footer-widget">
+                        <div class="widget-title">
+                            <h5>QUICK LINK</h5>
+                        </div>
+                        <nav class="widget-nav">
+                            <ul>
+                                <li><a href="/">Purchase</a></li>
+                                <li><a href="/">FAQs</a></li>
+                                <li><a href="/">Payment</a></li>
+                                <li><a href="/">News</a></li>
+                                <li><a href="/">Return</a></li>
+                                <li><a href="/">Advertise</a></li>
+                                <li><a href="/">Shipping</a></li>
+                                <li><a href="/">Career</a></li>
+                                <li><a href="/">Orders</a></li>
+                                <li><a href="/">Policities</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div> *@
+
+                <!-- Single Footer Widget -->
+                @* <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-footer-widget">
+                        <div class="widget-title">
+                            <h5>BEST SELLER</h5>
+                        </div>
+
+                        <!-- Single Best Seller Products -->
+                        <div class="single-best-seller-product d-flex align-items-center">
+                            <div class="product-thumbnail">
+                                <a href="shop-details.html"><img src="img/bg-img/4.jpg" alt=""></a>
+                            </div>
+                            <div class="product-info">
+                                <a href="shop-details.html">Cactus Flower</a>
+                                <p>$10.99</p>
+                            </div>
+                        </div>
+
+                        <!-- Single Best Seller Products -->
+                        <div class="single-best-seller-product d-flex align-items-center">
+                            <div class="product-thumbnail">
+                                <a href="shop-details.html"><img src="img/bg-img/5.jpg" alt=""></a>
+                            </div>
+                            <div class="product-info">
+                                <a href="shop-details.html">Tulip Flower</a>
+                                <p>$11.99</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> *@
+
+                <!-- Single Footer Widget -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-footer-widget">
+                        <div class="widget-title">
+                            <h5>CONTACT</h5>
+                        </div>
+
+                        <div class="contact-information">
+                            <p><span>Address:</span>@info.Address</p>
+                            <p><span>Phone:</span>@info.PhoneNumber</p>
+                            <p><span>Email:</span>@info.EMail</p>
+                            <p><span>Open hours:</span>@info.OpenHours</p>
+                            <!-- <p><span>Happy hours:</span> Sat: 2 PM to 4 PM</p> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Bottom Area -->
+    <div class="footer-bottom-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="border-line"></div>
+                </div>
+                <!-- Footer Nav -->
+                <div class="col-12 col-md-6">
+                    <div class="footer-nav">
+                        <nav>
+                            <ul>
+                                <li><a href="/">Home</a></li>
+                                <li><a href="/">About</a></li>
+                                @* <li><a href="/">Service</a></li> *@
+                                @* <li><a href="enquiryForm">Enquire</a></li> *@
+                                @* <li><a href="/">Blog</a></li> *@
+                                <li><a href="enquiryForm">Contact</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 </div>
+
+@code { 
+    private Info info = new Info();
+}

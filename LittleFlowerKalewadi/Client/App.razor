@@ -1,3 +1,5 @@
+@inject IJSRuntime JSRuntime
+
 <CascadingAuthenticationState>
     <Router AppAssembly="@typeof(Program).Assembly">
         <Found Context="routeData">
@@ -21,3 +23,10 @@
         </NotFound>
     </Router>
 </CascadingAuthenticationState>
+
+@code {
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntime.InvokeAsync<string>("activateFunctions.onAppRender", null);
+    }
+}
