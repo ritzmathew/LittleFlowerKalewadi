@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -7,6 +8,10 @@ namespace LittleFlowerKalewadi.ViewModels
 {
     public class RegisterViewModel : IRegisterViewModel
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+        public DateTime? CreatedDate { get; set; }
         public string EmailAddress { get; set; }
         public string Password { get; set; }
 
@@ -29,17 +34,25 @@ namespace LittleFlowerKalewadi.ViewModels
         {
             return new RegisterViewModel
             {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                DateOfBirth = user.DateOfBirth,
                 EmailAddress = user.EmailAddress,
-                Password = user.Password
+                Password = user.Password,
+                CreatedDate = user.CreatedDate
             };
         }
 
-        public static implicit operator User(RegisterViewModel RegisterViewModel)
+        public static implicit operator User(RegisterViewModel registerViewModel)
         {
             return new User
             {
-                EmailAddress = RegisterViewModel.EmailAddress,
-                Password = RegisterViewModel.Password
+                FirstName = registerViewModel.FirstName,
+                LastName = registerViewModel.LastName,
+                DateOfBirth = registerViewModel.DateOfBirth,
+                EmailAddress = registerViewModel.EmailAddress,
+                Password = registerViewModel.Password,
+                CreatedDate = registerViewModel.CreatedDate
             };
         }
     }

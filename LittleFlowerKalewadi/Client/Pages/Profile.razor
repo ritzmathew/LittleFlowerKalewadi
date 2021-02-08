@@ -1,0 +1,70 @@
+@page "/profile"
+@using System.Security.Claims
+@using LittleFlowerKalewadi.ViewModels
+@inject IProfileViewModel _profileViewModel
+@inject NavigationManager _navigationManager
+
+<section class="contact-area section-padding-200-0">
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-12 col-lg-5">
+                <div class="section-heading">
+                    <h2>Profile</h2>
+                    <p>Edit your profile below</p>
+                </div>
+                <div class="contact-form-area mb-100">
+                    <div class="row">
+                        <div class="col-6">
+                            <input type="text" @bind-value="_profileViewModel.FirstName" class="form-control">
+                        </div>
+                        <div class="col-6">
+                            <input type="text" @bind-value="_profileViewModel.LastName" class="form-control">
+                        </div>
+                        <div class="col-6">
+                            <input type="date" @bind-value="_profileViewModel.DateOfBirth" class="form-control">
+                        </div>
+                        <div class="col-6">
+                            <input type="text" @bind-value="_profileViewModel.EmailAddress" class="form-control">
+                        </div>
+                        <br />
+                        <div class="col-12">
+                            <button class="btn btn-primary" @onclick="_profileViewModel.UpdateProfile">Update Profile</button>
+                        </div>
+                        <br />
+                        <div class="col-6">
+                            <input type="password" @bind="_profileViewModel.Password" class="form-control">
+                        </div>
+                        <br />
+                        <div class="col-12">
+                            <button class="btn btn-danger" @onclick="_profileViewModel.ChangePassword">Change Password</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+    [CascadingParameter]
+    public Task<AuthenticationState> authenticationState { get; set; }
+
+    protected override async Task OnInitializedAsync() 
+    {
+        var authState = await authenticationState;//_authenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if(user.Identity.IsAuthenticated)
+        {
+            var claim = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier);
+            _profileViewModel.UserId = Convert.ToInt32(claim?.Value) ;
+            await _profileViewModel.GetProfile();
+        }
+        else
+        {
+            _navigationManager.NavigateTo("/");
+        }
+        
+    }
+
+}

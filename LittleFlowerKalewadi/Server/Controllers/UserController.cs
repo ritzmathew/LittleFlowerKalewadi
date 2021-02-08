@@ -35,6 +35,10 @@ namespace BlazingChat.Server.Controllers
                                         .FirstOrDefaultAsync();
             if(userExists == null) {
                 newUser.UserId = _context.Users.Max(user => user.UserId) + 1;
+                newUser.FirstName = user.FirstName;
+                newUser.LastName = user.LastName;
+                newUser.DateOfBirth = user.DateOfBirth;
+                newUser.CreatedDate = user.CreatedDate;
                 newUser.EmailAddress = user.EmailAddress;
                 newUser.Password = Utility.Encrypt(user.Password); 
                 newUser.Source = "test";
@@ -53,15 +57,14 @@ namespace BlazingChat.Server.Controllers
             if (loggedInUser != null)
             {
                 //create a claim
-                var claim = new Claim(ClaimTypes.Name, loggedInUser.EmailAddress);
+                var claim = new Claim(ClaimTypes.Email, loggedInUser.EmailAddress);
+                
                 //create claimsIdentity
                 var claimsIdentity = new ClaimsIdentity(new[] { claim }, "serverAuth");
                 //create claimsPrincipal
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                 //Sign In User
                 var done = HttpContext.SignInAsync(claimsPrincipal);
-                HttpContext.User = claimsPrincipal;
-                await Task.FromResult(done);
             }
 
             return await Task.FromResult(loggedInUser);
@@ -72,7 +75,20 @@ namespace BlazingChat.Server.Controllers
             User currentUser = new User();
             if (User.Identity.IsAuthenticated)
             {
-                currentUser.EmailAddress = User.FindFirstValue(ClaimTypes.Name);
+                currentUser.EmailAddress = User.FindFirstValue(ClaimTypes.Email);
+                currentUser = await _context.Users.Where(u => u.EmailAddress == currentUser.EmailAddress).FirstOrDefaultAsync();
+
+                if (currentUser == null)
+                {
+                    currentUser = new User();
+                    currentUser.UserId = _context.Users.Max(user => user.UserId) + 1;
+                    currentUser.EmailAddress = User.FindFirstValue(ClaimTypes.Email);
+                    currentUser.Password = Utility.Encrypt(currentUser.EmailAddress);
+                    currentUser.Source = "EXTL";
+
+                    _context.Users.Add(currentUser);
+                    await _context.SaveChangesAsync();
+                }
             }
             return await Task.FromResult(currentUser);
         }
@@ -82,5 +98,10 @@ namespace BlazingChat.Server.Controllers
             await HttpContext.SignOutAsync();
             return "Success";
         }  
+        [HttpGet("getprofile/{userId}")]
+        public async Task<User> GetProfile(int userId)
+        {
+            return await _context.Users.Where(u => u.UserId == userId).FirstOrDefaultAsync();
+        }
     }
 }
