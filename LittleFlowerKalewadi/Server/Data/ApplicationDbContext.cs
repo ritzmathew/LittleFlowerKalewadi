@@ -30,9 +30,9 @@ namespace LittleFlowerKalewadi.Server.Data
             {
                 entity.ToTable("Users");
 
-                entity.Property(e => e.UserId)
-                    .HasColumnName("user_id")
-                    .ValueGeneratedNever();
+                 entity.Property(e => e.UserId)
+                     .HasColumnName("user_id")
+                     .ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedDate)
                     .HasColumnName("created_date")

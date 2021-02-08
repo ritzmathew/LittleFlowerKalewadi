@@ -25,6 +25,23 @@ namespace BlazingChat.Server.Controllers
         }
         
         //Authentication Methods
+        [HttpPut("registeruser")]
+        public async Task<User> RegisterUser([FromBody] User user)
+        {
+            User newUser = new User();
+            User userExists = await _context.Users
+                                        .Where(u => u.EmailAddress == user.EmailAddress)
+                                        .FirstOrDefaultAsync();
+            if(userExists == null) {
+                newUser.UserId = _context.Users.Max(user => user.UserId) + 1;
+                newUser.EmailAddress = user.EmailAddress;
+                newUser.Password = user.Password;
+                newUser.Source = "test";
+                _context.Users.Add(newUser);
+                await _context.SaveChangesAsync();
+            }
+            return await Task.FromResult(newUser);
+        }
         [HttpPost("loginuser")]
         public async Task<ActionResult<User>> LoginUser(User user)
         {
@@ -55,6 +72,7 @@ namespace BlazingChat.Server.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 currentUser.EmailAddress = User.FindFirstValue(ClaimTypes.Name);
+                currentUser = await _context.Users.Where(u => u.EmailAddress == currentUser.EmailAddress).FirstOrDefaultAsync();
             }
             return await Task.FromResult(currentUser);
         }

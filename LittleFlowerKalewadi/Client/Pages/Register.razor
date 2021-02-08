@@ -1,0 +1,40 @@
+@page "/register"
+@using LittleFlowerKalewadi.ViewModels
+@inject IRegisterViewModel _registerViewModel
+@inject NavigationManager _navigationManager
+
+<section class="section-padding-200-0">
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-12 col-lg-5">
+                <div class="section-heading">
+                    <h2>Registration</h2>
+                    <p>Create a new account</p>
+                </div>
+                <div class="contact-form-area mb-100">
+                    <div class="row">
+                        <div class="col-6">
+                            <input type="text" @bind="_registerViewModel.EmailAddress" class="form-control" placeholder="email address">
+                        </div>
+                        <br />
+                        <div class="col-6">
+                            <input type="password" @bind="_registerViewModel.Password" class="form-control" placeholder="password">
+                        </div>
+                        <br />
+                        <div class="col-12">
+                            <button class="btn alazea-btn mt-15" @onclick="RegisterUser">Register</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+    public async Task RegisterUser()
+    {
+        await _registerViewModel.RegisterUser();
+        _navigationManager.NavigateTo("/login",true);
+    }
+}

@@ -5,13 +5,13 @@
     <Authorized>
         <div class="login">
             <a href="#"><i class="fa fa-user" aria-hidden="true"></i> <span>Logged in as @context.User.Identity.Name</span></a>            
-            <a @onclick="LogoutUser"><i class="fa fa-sign-out" aria-hidden="true"></i> <span>Log out</span></a>
+            <a href="#" @onclick="LogoutUser"><i class="fa fa-sign-out" aria-hidden="true"></i> <span>Log out</span></a>
         </div>
     </Authorized>
     <NotAuthorized>
         <div class="login">
             <a href="login"><i class="fa fa-sign-in" aria-hidden="true"></i> <span>Login</span></a>
-            <a href="#"><i class="fa fa-user" aria-hidden="true"></i> <span>Register</span></a>
+            <a href="register"><i class="fa fa-user" aria-hidden="true"></i> <span>Register</span></a>
         </div>
         @* <a href="authentication/register">Register</a>
         <a href="authentication/login">Log in</a> *@
@@ -23,10 +23,5 @@
     {
         await _httpClient.GetAsync("user/logoutuser");
         _navigationManager.NavigateTo("/", true);
-    }
-
-    private void LoginUser()
-    {
-        _navigationManager.NavigateTo("/login", true);
     }
 }

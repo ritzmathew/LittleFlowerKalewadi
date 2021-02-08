@@ -1,9 +1,7 @@
-use school
+DROP TABLE Users
 
-DROP TABLE Parent
-
-CREATE TABLE Parent (
-    user_id int IDENTITY(1,1) PRIMARY KEY,
+CREATE TABLE Users (
+    user_id int PRIMARY KEY,
     email_address varchar(255) NOT NULL,
     password varchar(255) NOT NULL,
     source varchar(255) NOT NULL,
@@ -15,7 +13,9 @@ CREATE TABLE Parent (
 );
 
 
-INSERT INTO Parent (email_address,password,source,first_name,last_name,
+INSERT INTO Users (user_id,email_address,password,source,first_name,last_name,
 date_of_birth,notifications,created_date)
 VALUES
-('test.user@gmail.com','Aa12345!','APPL','Julius','Caesar',NULL,1,NULL)
+(1,'test.user@gmail.com','Aa12345!','APPL','Julius','Caesar',NULL,1,NULL)
+
+select * from Users
