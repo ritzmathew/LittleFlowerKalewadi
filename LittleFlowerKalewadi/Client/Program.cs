@@ -6,8 +6,9 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
+using LittleFlowerKalewadi.ViewModels;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace LittleFlowerKalewadi.Client
 {
@@ -18,13 +19,24 @@ namespace LittleFlowerKalewadi.Client
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddHttpClient("LittleFlowerKalewadi.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
-                .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+            builder.Services.AddOptions();
+            builder.Services.AddAuthorizationCore();
 
-            // Supply HttpClient instances that include access tokens when making requests to the server project
-            builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("LittleFlowerKalewadi.ServerAPI"));
+            builder.Services.AddTransient(sp => 
+                new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-            builder.Services.AddApiAuthorization();
+            builder.Services.AddHttpClient<ILoginViewModel, LoginViewModel>
+                ("LitteFlowerKalewadi.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
+
+            builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+
+            // builder.Services.AddHttpClient("LittleFlowerKalewadi.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+            //     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
+            // // Supply HttpClient instances that include access tokens when making requests to the server project
+            // builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("LittleFlowerKalewadi.ServerAPI"));
+
+            //builder.Services.AddApiAuthorization();
 
             await builder.Build().RunAsync();
         }

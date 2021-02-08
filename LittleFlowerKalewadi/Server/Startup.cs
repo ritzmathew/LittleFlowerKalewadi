@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace LittleFlowerKalewadi.Server
 {
@@ -67,12 +68,18 @@ namespace LittleFlowerKalewadi.Server
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddIdentityServer()
-                .AddSigningCredential(cert)
-                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+            // services.AddIdentityServer()
+            //     .AddSigningCredential(cert)
+            //     .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
-            services.AddAuthentication()
-                .AddIdentityServerJwt();
+            // services.AddAuthentication()
+            //     .AddIdentityServerJwt();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }
+            ).AddCookie();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -100,9 +107,9 @@ namespace LittleFlowerKalewadi.Server
 
             app.UseRouting();
 
-            app.UseIdentityServer();
+            //app.UseIdentityServer();
             app.UseAuthentication();
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
