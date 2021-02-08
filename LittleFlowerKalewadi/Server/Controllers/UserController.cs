@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using LittleFlowerKalewadi.Server.Data;
+using LittleFlowerKalewadi.Server;
 
 namespace BlazingChat.Server.Controllers
 {
@@ -35,7 +36,7 @@ namespace BlazingChat.Server.Controllers
             if(userExists == null) {
                 newUser.UserId = _context.Users.Max(user => user.UserId) + 1;
                 newUser.EmailAddress = user.EmailAddress;
-                newUser.Password = user.Password;
+                newUser.Password = Utility.Encrypt(user.Password); 
                 newUser.Source = "test";
                 _context.Users.Add(newUser);
                 await _context.SaveChangesAsync();
@@ -45,10 +46,10 @@ namespace BlazingChat.Server.Controllers
         [HttpPost("loginuser")]
         public async Task<ActionResult<User>> LoginUser(User user)
         {
+            user.Password = Utility.Encrypt(user.Password);
             User loggedInUser = await _context.Users
                                         .Where(u => u.EmailAddress == user.EmailAddress && u.Password == user.Password)
                                         .FirstOrDefaultAsync();
-
             if (loggedInUser != null)
             {
                 //create a claim
@@ -72,7 +73,6 @@ namespace BlazingChat.Server.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 currentUser.EmailAddress = User.FindFirstValue(ClaimTypes.Name);
-                currentUser = await _context.Users.Where(u => u.EmailAddress == currentUser.EmailAddress).FirstOrDefaultAsync();
             }
             return await Task.FromResult(currentUser);
         }
