@@ -5,7 +5,7 @@
     <Authorized>
         <div class="login">
             <a href="profile"><i class="fa fa-user" aria-hidden="true"></i> <span>Logged in as @context.User.Identity.Name</span></a>            
-            <a href="#" @onclick="LogoutUser"><i class="fa fa-sign-out" aria-hidden="true"></i> <span>Log out</span></a>
+            <a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> <span>Log out</span></a>
         </div>
     </Authorized>
     <NotAuthorized>
@@ -18,10 +18,4 @@
     </NotAuthorized>
 </AuthorizeView>
 
-@code{
-    private async Task LogoutUser()
-    {
-        await _httpClient.GetAsync("user/logoutuser");
-        _navigationManager.NavigateTo("/", true);
-    }
-}
+

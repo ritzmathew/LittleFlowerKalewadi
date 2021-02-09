@@ -1,0 +1,16 @@
+@page "/logout"
+@inject NavigationManager _navigationManager
+@inject HttpClient _httpClient
+
+<p>
+    Logging out, you will be redirected to the homepage automatically!
+</p>
+
+
+@code{
+    protected override async Task OnInitializedAsync() 
+    { 
+        await _httpClient.GetAsync("user/logoutuser");
+        _navigationManager.NavigateTo("/", true);
+    }
+}

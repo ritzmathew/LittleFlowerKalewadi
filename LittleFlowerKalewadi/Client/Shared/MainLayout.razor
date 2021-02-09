@@ -90,6 +90,23 @@
                             <ul>
                                 <li><a href="/">Home</a></li>
                                 <li><a href="#">About</a></li>
+                                <li><a href="#">Account</a>
+                                    <ul class="dropdown">                                       
+                                        <AuthorizeView>
+                                            <Authorized>
+                                                <div class="login">
+                                                    <li><a href="profile">Profile</a></li>
+                                                    <li><a href="logout">Logout</a></li>
+                                                </div>
+                                            </Authorized>
+                                            <NotAuthorized>
+                                                <li><a href="login">Login</a></li>
+                                                <li><a href="register">Register</a></li>
+                                            </NotAuthorized>
+                                        </AuthorizeView>
+                                    </ul>
+                                </li>
+                                
                                 @* <li><a href="#">Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="/">Home</a></li>
