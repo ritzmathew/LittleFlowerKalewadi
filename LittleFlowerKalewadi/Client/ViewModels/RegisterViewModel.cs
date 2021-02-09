@@ -3,16 +3,22 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using LittleFlowerKalewadi.Shared;
+using System.ComponentModel.DataAnnotations;
 
 namespace LittleFlowerKalewadi.ViewModels
 {
     public class RegisterViewModel : IRegisterViewModel
     {
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
+        [Required]
         public DateTime? DateOfBirth { get; set; }
         public DateTime? CreatedDate { get; set; }
+        [Required]
         public string EmailAddress { get; set; }
+        [Required]
         public string Password { get; set; }
 
         private HttpClient _httpClient;

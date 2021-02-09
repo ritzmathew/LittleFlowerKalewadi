@@ -3,45 +3,67 @@
 @inject IRegisterViewModel _registerViewModel
 @inject NavigationManager _navigationManager
 
-<section class="section-padding-200-0">
-    <div class="container">
-        <div class="row align-items-center justify-content-between">
-            <div class="col-12 col-lg-5">
-                <div class="section-heading">
-                    <h2>Registration</h2>
-                    <p>Create a new account</p>
-                </div>
-                <div class="contact-form-area mb-100">
-                    <div class="row">
-                        <div class="col-6">
-                            <input type="text" @bind="_registerViewModel.FirstName" class="form-control" placeholder="First Name">
-                        </div>
-                        <div class="col-6">
-                            <input type="text" @bind="_registerViewModel.LastName" class="form-control" placeholder="Last Name">
-                        </div>
-                        <div class="col-6">
-                            <input type="date" @bind="_registerViewModel.DateOfBirth" class="form-control" placeholder="Last Name">
-                        </div>
-                        <div class="col-6">
-                            <input type="text" @bind="_registerViewModel.EmailAddress" class="form-control" placeholder="Email Address">
-                        </div>
-                        <br />
-                        <div class="col-6">
-                            <input type="password" @bind="_registerViewModel.Password" class="form-control" placeholder="Password">
-                        </div>
-                        <br />
-                        <div class="col-12">
-                            <button class="btn alazea-btn mt-15" @onclick="RegisterUser">Register</button>
+<EditForm class="contact-form-area mb-100" Model="_registerViewModel" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <section class="section-padding-200-0">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-12 col-lg-5">
+                    <div class="section-heading">
+                        <h2>Registration</h2>
+                        <p>Create a new account</p>
+                    </div>
+                    <div class="contact-form-area mb-100">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    First Name
+                                    <InputText @bind-Value="_registerViewModel.FirstName" class="form-control"/>
+                                    <ValidationMessage For="@(() => _registerViewModel.FirstName)" />
+                                </div>                        
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    Last Name
+                                    <InputText @bind-Value="_registerViewModel.LastName" class="form-control"/>
+                                    <ValidationMessage For="@(() => _registerViewModel.LastName)" />
+                                </div>                        
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    Date of birth
+                                    <InputDate @bind-Value="_registerViewModel.DateOfBirth" class="form-control"/>
+                                    <ValidationMessage For="@(() => _registerViewModel.DateOfBirth)" />
+                                </div>                        
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    Email Address
+                                    <InputText @bind-Value="_registerViewModel.EmailAddress" class="form-control"/>
+                                    <ValidationMessage For="@(() => _registerViewModel.EmailAddress)" />
+                                </div>                        
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    Password
+                                    <InputText type="password" @bind-Value="_registerViewModel.Password" class="form-control"/>
+                                    <ValidationMessage For="@(() => _registerViewModel.Password)" />
+                                </div>                        
+                            </div>
+                            <br />
+                            <div class="col-12">
+                                <button class="btn alazea-btn mt-15" type="submit">Register</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</EditForm>
 
 @code {
-    public async Task RegisterUser()
+    public async Task HandleValidSubmit()
     {
         _registerViewModel.CreatedDate = DateTime.Now;
         await _registerViewModel.RegisterUser();

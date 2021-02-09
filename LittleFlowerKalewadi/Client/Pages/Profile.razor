@@ -4,46 +4,66 @@
 @inject IProfileViewModel _profileViewModel
 @inject NavigationManager _navigationManager
 
-<section class="contact-area section-padding-200-0">
-    <div class="container">
-        <div class="row align-items-center justify-content-between">
-            <div class="col-12 col-lg-5">
-                <div class="section-heading">
-                    <h2>Profile</h2>
-                    <p>Edit your profile below</p>
-                </div>
-                <div class="contact-form-area mb-100">
-                    <div class="row">
-                        <div class="col-6">
-                            <input type="text" @bind-value="_profileViewModel.FirstName" class="form-control">
-                        </div>
-                        <div class="col-6">
-                            <input type="text" @bind-value="_profileViewModel.LastName" class="form-control">
-                        </div>
-                        <div class="col-6">
-                            <input type="date" @bind-value="_profileViewModel.DateOfBirth" class="form-control">
-                        </div>
-                        <div class="col-6">
-                            <input type="text" @bind-value="_profileViewModel.EmailAddress" class="form-control">
-                        </div>
-                        <br />
-                        <div class="col-12">
-                            <button class="btn btn-primary" @onclick="_profileViewModel.UpdateProfile">Update Profile</button>
-                        </div>
-                        <br />
-                        <div class="col-6">
-                            <input type="password" @bind="_profileViewModel.Password" class="form-control">
-                        </div>
-                        <br />
-                        <div class="col-12">
-                            <button class="btn btn-danger" @onclick="_profileViewModel.ChangePassword">Change Password</button>
+<EditForm class="contact-form-area mb-100" Model="_profileViewModel" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <section class="contact-area section-padding-200-0">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-12 col-lg-5">
+                    <div class="section-heading">
+                        <h2>Profile</h2>
+                        <p>Edit your profile below</p>
+                    </div>
+                    <div class="contact-form-area mb-100">
+                        <div class="row">
+                                <div class="col-12">
+                                <div class="form-group">
+                                    First Name
+                                    <InputText @bind-Value="_profileViewModel.FirstName" class="form-control"/>
+                                    <ValidationMessage For="@(() => _profileViewModel.FirstName)" />
+                                </div>                        
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    Last Name
+                                    <InputText @bind-Value="_profileViewModel.LastName" class="form-control"/>
+                                    <ValidationMessage For="@(() => _profileViewModel.LastName)" />
+                                </div>                        
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    Date of birth
+                                    <InputDate @bind-Value="_profileViewModel.DateOfBirth" class="form-control"/>
+                                    <ValidationMessage For="@(() => _profileViewModel.DateOfBirth)" />
+                                </div>                        
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    Email Address
+                                    <InputText @bind-Value="_profileViewModel.EmailAddress" class="form-control"/>
+                                    <ValidationMessage For="@(() => _profileViewModel.EmailAddress)" />
+                                </div>                        
+                            </div>
+                            <br />
+                            <div class="col-12">
+                                <button class="btn alazea-btn mt-15" type="submit">Update Profile</button>
+                            </div>
+                            @* <br />
+                            <div class="col-6">
+                                <input type="password" @bind="_profileViewModel.Password" class="form-control">
+                            </div>
+                            <br />
+                            <div class="col-12">
+                                <button class="btn btn-danger" @onclick="_profileViewModel.ChangePassword">Change Password</button>
+                            </div> *@
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</EditForm>
+
 
 @code {
     [CascadingParameter]
@@ -65,6 +85,12 @@
             _navigationManager.NavigateTo("/");
         }
         
+    }
+
+    public async Task HandleValidSubmit()
+    {
+        await _profileViewModel.UpdateProfile();
+        _navigationManager.NavigateTo("/profile",true);
     }
 
 }

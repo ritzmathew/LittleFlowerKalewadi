@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authentication;
 using LittleFlowerKalewadi.Server.Data;
 using LittleFlowerKalewadi.Server;
 
-namespace BlazingChat.Server.Controllers
+namespace LittleFlowerKalewadi.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -46,6 +46,24 @@ namespace BlazingChat.Server.Controllers
                 await _context.SaveChangesAsync();
             }
             return await Task.FromResult(newUser);
+        }
+        [HttpPost("updateprofile")]
+        public async Task<User> UpdateProfile([FromBody] User user)
+        {
+            User _user = await _context.Users
+                                        .Where(u => u.UserId == user.UserId)
+                                        .FirstOrDefaultAsync();
+            if(_user != null) {
+                _user.FirstName = user.FirstName;
+                _user.LastName = user.LastName;
+                _user.DateOfBirth = user.DateOfBirth;
+                _user.CreatedDate = user.CreatedDate;
+                _user.EmailAddress = user.EmailAddress;
+                _user.Source = "test";
+                _context.Users.Update(_user);
+                await _context.SaveChangesAsync();
+            }
+            return await Task.FromResult(_user);
         }
         [HttpPost("loginuser")]
         public async Task<ActionResult<User>> LoginUser(User user)

@@ -3,15 +3,20 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using LittleFlowerKalewadi.Shared;
+using System.ComponentModel.DataAnnotations;
 
 namespace LittleFlowerKalewadi.ViewModels
 {
     public class ProfileViewModel : IProfileViewModel
     {
         public int UserId { get; set; }
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
+        [Required]
         public DateTime? DateOfBirth { get; set; }
+        [Required]
         public string EmailAddress { get; set; }
         public string Password { get; set; }
         public string Message { get; set; }
@@ -33,7 +38,7 @@ namespace LittleFlowerKalewadi.ViewModels
         }
         public async Task UpdateProfile()
         {
-            await _httpClient.PostAsJsonAsync<User>($"user/updateprofile/{this.UserId}", this);
+            await _httpClient.PostAsJsonAsync<User>($"user/updateprofile", this);
             this.Message = "Profile updated successfully";
         }
         public async Task ChangePassword()
