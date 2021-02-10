@@ -26,8 +26,8 @@
                     <div class="top-header-content d-flex align-items-center justify-content-between">
                         <!-- Top Header Content -->
                         <div class="top-header-meta">
-                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="@info.EMail"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span>@info.EMail</span></a>
-                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="@info.PhoneNumber"><i class="fa fa-phone" aria-hidden="true"></i> <span>@info.PhoneNumber</span></a>
+                            <a href="mailto:@info.EMail" data-toggle="tooltip" data-placement="bottom" title="@info.EMail"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span>@info.EMail</span></a>
+                            <a href="tel:@info.PhoneNumber" data-toggle="tooltip" data-placement="bottom" title="@info.PhoneNumber"><i class="fa fa-phone" aria-hidden="true"></i> <span>@info.PhoneNumber</span></a>
                         </div>
 
                         <!-- Top Header Content -->
@@ -94,10 +94,9 @@
                                     <ul class="dropdown">                                       
                                         <AuthorizeView>
                                             <Authorized>
-                                                <div class="login">
-                                                    <li><a href="profile">Profile</a></li>
-                                                    <li><a href="logout">Logout</a></li>
-                                                </div>
+                                                <li><a href="profile">Profile</a></li>
+                                                <li><a href="resetpassword">Reset Password</a></li>
+                                                <li><a href="logout">Logout</a></li>
                                             </Authorized>
                                             <NotAuthorized>
                                                 <li><a href="login">Login</a></li>

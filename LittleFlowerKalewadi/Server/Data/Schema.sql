@@ -4,11 +4,10 @@ CREATE TABLE Users (
     user_id int PRIMARY KEY,
     email_address varchar(255) NOT NULL,
     password varchar(255) NOT NULL,
-    source varchar(255) NOT NULL,
+    staff int,
     first_name varchar(255),
     last_name varchar(255),
     date_of_birth DATETIME,
-    notifications int,
     created_date DATETIME
 );
 

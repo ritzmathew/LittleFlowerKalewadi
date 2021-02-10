@@ -98,11 +98,12 @@ namespace LittleFlowerKalewadi.Server
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
 
+
             app.UseRouting();
 
             //app.UseIdentityServer();
             app.UseAuthentication();
-            //app.UseAuthorization();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

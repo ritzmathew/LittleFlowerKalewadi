@@ -32,7 +32,11 @@
                             <br />
                             <div class="col-12">
                                 <button type="submit" class="btn alazea-btn">Login</button>
+                                <br />
+                                <p style="color:#dc3545">@_loginViewModel.Message</p>
                             </div>
+                            <br />
+
                         </div>
                     </div>
                 </div>
@@ -44,7 +48,9 @@
 @code {
     private async Task HandleValidSubmit()
     {
-        await _loginViewModel.LoginUser();
-        _navigationManager.NavigateTo("/",true);
+        bool success = await _loginViewModel.LoginUser();
+        if(success) {
+            _navigationManager.NavigateTo("/",true);        
+        }
     }
 }

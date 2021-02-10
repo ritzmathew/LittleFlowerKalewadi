@@ -10,15 +10,23 @@ namespace LittleFlowerKalewadi.ViewModels
     public class RegisterViewModel : IRegisterViewModel
     {
         [Required]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Required]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
         [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Date of Birth")]
         public DateTime? DateOfBirth { get; set; }
         public DateTime? CreatedDate { get; set; }
         [Required]
+        [EmailAddress]
+        [Display(Name = "E-Mail Address")]
         public string EmailAddress { get; set; }
         [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         private HttpClient _httpClient;

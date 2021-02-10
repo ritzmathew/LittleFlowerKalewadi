@@ -33,6 +33,9 @@ namespace LittleFlowerKalewadi.Client
             
             builder.Services.AddHttpClient<IProfileViewModel, ProfileViewModel>
                 ("LitteFlowerKalewadi.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
+            
+            builder.Services.AddHttpClient<IResetPasswordViewModel, ResetPasswordViewModel>
+                ("LitteFlowerKalewadi.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 
             builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 

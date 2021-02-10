@@ -42,15 +42,13 @@ namespace LittleFlowerKalewadi.Server.Data
 
                 entity.Property(e => e.LastName).HasColumnName("last_name");
 
-                entity.Property(e => e.Notifications).HasColumnName("notifications");
-
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasColumnName("password");
 
-                entity.Property(e => e.Source)
+                entity.Property(e => e.Staff)
                     .IsRequired()
-                    .HasColumnName("source");
+                    .HasColumnName("staff");
             });
 
             OnModelCreatingPartial(modelBuilder);
