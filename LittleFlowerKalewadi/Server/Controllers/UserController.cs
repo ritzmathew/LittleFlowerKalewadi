@@ -40,7 +40,7 @@ namespace LittleFlowerKalewadi.Server.Controllers
                 newUser.UserId = _context.Users.Any() ? _context.Users.Max(user => user.UserId) + 1 : 1;
                 newUser.FirstName = user.FirstName;
                 newUser.LastName = user.LastName;
-                newUser.DateOfBirth = user.DateOfBirth;
+                newUser.DateOfBirth = DateTime.Now;
                 newUser.CreatedDate = user.CreatedDate;
                 newUser.EmailAddress = user.EmailAddress;
                 newUser.Password = Utility.Encrypt(user.Password); 
@@ -118,22 +118,8 @@ namespace LittleFlowerKalewadi.Server.Controllers
             User currentUser = new User();
             if (User.Identity.IsAuthenticated)
             {
-                //currentUser.UserId = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
-                //currentUser = await _context.Users.Where(u => u.UserId == currentUser.UserId).FirstOrDefaultAsync();
-
                 currentUser.UserId = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
                 currentUser = await _context.Users.Where(u => u.UserId == currentUser.UserId).FirstOrDefaultAsync();
-                //if (currentUser == null)
-                //{
-                //    currentUser = new User();
-                //    currentUser.UserId = _context.Users.Max(user => user.UserId) + 1;
-                //    currentUser.EmailAddress = User.FindFirstValue(ClaimTypes.Email);
-                //    currentUser.Password = Utility.Encrypt(currentUser.EmailAddress);
-                //    currentUser.Source = "EXTL";
-
-                //    _context.Users.Add(currentUser);
-                //    await _context.SaveChangesAsync();
-                //}
             }
             return await Task.FromResult(currentUser);
         }

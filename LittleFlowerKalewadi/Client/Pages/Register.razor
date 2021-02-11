@@ -65,7 +65,6 @@
 @code {
     public async Task HandleValidSubmit()
     {
-        _registerViewModel.CreatedDate = DateTime.Now;
         await _registerViewModel.RegisterUser();
         _navigationManager.NavigateTo("/login",true);
     }
