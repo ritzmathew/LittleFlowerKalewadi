@@ -44,7 +44,7 @@ namespace LittleFlowerKalewadi.Server.Controllers
                 newUser.CreatedDate = user.CreatedDate;
                 newUser.EmailAddress = user.EmailAddress;
                 newUser.Password = Utility.Encrypt(user.Password); 
-                newUser.Staff = 0;
+                newUser.RoleId = 0;
                 _context.Users.Add(newUser);
                 await _context.SaveChangesAsync();
             }

@@ -16,6 +16,8 @@ namespace LittleFlowerKalewadi.Server.Data
 
         public virtual DbSet<User> Users { get; set; }
 
+        public virtual DbSet<Role> Roles { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>(entity =>
@@ -46,9 +48,24 @@ namespace LittleFlowerKalewadi.Server.Data
                     .IsRequired()
                     .HasColumnName("password");
 
-                entity.Property(e => e.Staff)
+                entity.Property(e => e.RoleId)
+                    .HasColumnName("role_id")
+                    .HasDefaultValueSql("((1))");
+
+            });
+
+            modelBuilder.Entity<Role>(entity =>
+            {
+                entity.ToTable("Role");
+
+                entity.Property(e => e.RoleId).HasColumnName("role_id");
+
+                entity.Property(e => e.RoleDesc)
                     .IsRequired()
-                    .HasColumnName("staff");
+                    .HasColumnName("role_desc")
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('New Position - title not formalized yet')");
             });
 
             OnModelCreatingPartial(modelBuilder);
