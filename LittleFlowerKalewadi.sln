@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleFlowerKalewadi.Server", "LittleFlowerKalewadi\Server\LittleFlowerKalewadi.Server.csproj", "{A80C81FA-D9FC-432E-BF5C-71522DD3FEC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleFlowerKalewadi.Server", "LittleFlowerKalewadi\Server\LittleFlowerKalewadi.Server.csproj", "{A80C81FA-D9FC-432E-BF5C-71522DD3FEC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleFlowerKalewadi.Client", "LittleFlowerKalewadi\Client\LittleFlowerKalewadi.Client.csproj", "{893E71F8-5B6A-483B-B40D-28E96A225A8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleFlowerKalewadi.Client", "LittleFlowerKalewadi\Client\LittleFlowerKalewadi.Client.csproj", "{893E71F8-5B6A-483B-B40D-28E96A225A8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleFlowerKalewadi.Shared", "LittleFlowerKalewadi\Shared\LittleFlowerKalewadi.Shared.csproj", "{F5C9F9AC-AD49-4AE1-A244-EBC57BC51CA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleFlowerKalewadi.Shared", "LittleFlowerKalewadi\Shared\LittleFlowerKalewadi.Shared.csproj", "{F5C9F9AC-AD49-4AE1-A244-EBC57BC51CA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

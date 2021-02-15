@@ -40,11 +40,11 @@ namespace LittleFlowerKalewadi.Server.Controllers
                 newUser.UserId = _context.Users.Any() ? _context.Users.Max(user => user.UserId) + 1 : 1;
                 newUser.FirstName = user.FirstName;
                 newUser.LastName = user.LastName;
-                newUser.DateOfBirth = DateTime.Now;
-                newUser.CreatedDate = user.CreatedDate;
+                newUser.DateOfBirth = user.DateOfBirth;
+                newUser.CreatedDate = DateTime.Now;
                 newUser.EmailAddress = user.EmailAddress;
                 newUser.Password = Utility.Encrypt(user.Password); 
-                newUser.RoleId = 0;
+                newUser.RoleId = 99;
                 _context.Users.Add(newUser);
                 await _context.SaveChangesAsync();
             }
@@ -69,10 +69,11 @@ namespace LittleFlowerKalewadi.Server.Controllers
         }
         [AllowAnonymous]
         [HttpPost("loginuser")]
-        public async Task<ActionResult<User>> LoginUser(User user)
+        public async Task<ActionResult<string>> LoginUser(User user)
         {
             user.Password = Utility.Encrypt(user.Password);
             User loggedInUser = await _context.Users
+                                        .Include(u => u.Role)
                                         .Where(u => u.EmailAddress == user.EmailAddress && u.Password == user.Password)
                                         .FirstOrDefaultAsync();
             if (loggedInUser != null)
@@ -80,8 +81,9 @@ namespace LittleFlowerKalewadi.Server.Controllers
                 //create a claim
                 var claimEmailAddress = new Claim(ClaimTypes.Email, loggedInUser.EmailAddress);
                 var claimNameIdentifier = new Claim(ClaimTypes.NameIdentifier, Convert.ToString(loggedInUser.UserId));
+                var claimRole = new Claim(ClaimTypes.Role, loggedInUser.Role.RoleDesc);
                 //create claimsIdentity
-                var claimsIdentity = new ClaimsIdentity(new[] { claimEmailAddress, claimNameIdentifier }, "serverAuth");
+                var claimsIdentity = new ClaimsIdentity(new[] { claimEmailAddress, claimNameIdentifier, claimRole }, "serverAuth");
                 //create claimsPrincipal
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                 //Sign In User
@@ -89,7 +91,7 @@ namespace LittleFlowerKalewadi.Server.Controllers
             } else {
                 return Unauthorized();
             }
-            return await Task.FromResult(loggedInUser);
+            return await Task.FromResult(loggedInUser.EmailAddress);
         }
         [HttpPost("resetpassword")]
         public async Task<string> ResetPassword(User user)
@@ -118,13 +120,18 @@ namespace LittleFlowerKalewadi.Server.Controllers
             User currentUser = new User();
             if (User.Identity.IsAuthenticated)
             {
-                currentUser.UserId = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
-                currentUser = await _context.Users.Where(u => u.UserId == currentUser.UserId).FirstOrDefaultAsync();
+                var userId = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                currentUser = await _context.Users
+                                            .Include(u => u.Role)
+                                            .Where(u => u.UserId == userId)
+                                            .FirstOrDefaultAsync();
+                currentUser.Role.Users = null;
+
             }
             return await Task.FromResult(currentUser);
         }
         [HttpGet("logoutuser")]
-        public async Task<ActionResult<String>> LogOutUser()
+        public async Task<ActionResult<string>> LogOutUser()
         {
             await HttpContext.SignOutAsync();
             return "Success";
@@ -134,6 +141,11 @@ namespace LittleFlowerKalewadi.Server.Controllers
         public async Task<User> GetProfile(int userId)
         {
             return await _context.Users.Where(u => u.UserId == userId).FirstOrDefaultAsync();
+        }
+        [HttpGet("getunassigned")]
+        public async Task<ActionResult<IEnumerable<User>>> GetPublishers()
+        {
+            return await _context.Users.Where(u => u.RoleId == 99).ToListAsync();
         }
     }
 }

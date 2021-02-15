@@ -28,8 +28,9 @@ namespace LittleFlowerKalewadi.Client
                  //create a claim
                 var claimEmailAddress = new Claim(ClaimTypes.Name, currentUser.EmailAddress);
                 var claimNameIdentifier = new Claim(ClaimTypes.NameIdentifier, Convert.ToString(currentUser.UserId));
+                var claimRole = new Claim(ClaimTypes.Role, currentUser.Role.RoleDesc);
                 //create claimsIdentity
-                var claimsIdentity = new ClaimsIdentity(new[] { claimEmailAddress, claimNameIdentifier }, "serverAuth");
+                var claimsIdentity = new ClaimsIdentity(new[] { claimEmailAddress, claimNameIdentifier, claimRole }, "serverAuth");
                 //create claimsPrincipal
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 

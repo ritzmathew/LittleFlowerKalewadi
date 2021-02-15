@@ -11,14 +11,6 @@ CREATE TABLE [dbo].[User] (
     created_date DATETIME
 );
 
-
-INSERT INTO Users (user_id,email_address,password,source,first_name,last_name,
-date_of_birth,notifications,created_date)
-VALUES
-(1,'test.user@gmail.com','Aa12345!','APPL','Julius','Caesar',NULL,1,NULL)
-
-select * from Users
-
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LittleFlowerKalewadi.Server.Models
+namespace LittleFlowerKalewadi.Shared
 {
     public partial class Role
     {

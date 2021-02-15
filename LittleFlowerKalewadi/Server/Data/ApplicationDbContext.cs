@@ -22,7 +22,7 @@ namespace LittleFlowerKalewadi.Server.Data
         {
             modelBuilder.Entity<User>(entity =>
             {
-                entity.ToTable("Users");
+                entity.ToTable("User");
 
                  entity.Property(e => e.UserId)
                      .HasColumnName("user_id")
@@ -51,6 +51,10 @@ namespace LittleFlowerKalewadi.Server.Data
                 entity.Property(e => e.RoleId)
                     .HasColumnName("role_id")
                     .HasDefaultValueSql("((1))");
+
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.RoleId);
 
             });
 

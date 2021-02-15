@@ -73,6 +73,7 @@ namespace LittleFlowerKalewadi.Server
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             }
             ).AddCookie();
+            services.AddAuthorization();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
