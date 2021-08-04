@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lfkwebapp-deployment
+spec:
+  selector:
+    matchLabels:
+      app: lfkwebapp
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: lfkwebapp
+    spec:
+      containers:
+      - name: lfkwebapp
+        image: asia.gcr.io/studied-jigsaw-321716/lfkwebapp:stag
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lfkwebapp-service
+  labels:
+    app: lfkwebapp-service
+spec:
+  type: LoadBalancer
+  externalIPs:
+  - 34.93.248.34
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 32185
+  selector:
+    app: lfkwebapp
+  sessionAffinity: None
+status:
+  loadBalancer:
+    ingress:
+    - ip: 34.93.248.34
