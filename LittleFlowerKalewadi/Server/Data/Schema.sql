@@ -1,4 +1,14 @@
+IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'school')
+BEGIN
+CREATE DATABASE [school]
+END
+GO
+
+USE [school]
+GO
+
 DROP TABLE [dbo].[User]
+DROP TABLE [dbo].[Role]
 
 CREATE TABLE [dbo].[User] (
     user_id int PRIMARY KEY,
