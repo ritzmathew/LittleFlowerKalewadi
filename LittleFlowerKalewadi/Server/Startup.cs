@@ -24,7 +24,7 @@ namespace LittleFlowerKalewadi.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            X509Certificate2 cert = null;
+            //X509Certificate2 cert = null;
             // using (X509Store certStore = new X509Store(StoreName.My, StoreLocation.CurrentUser))
             // {
             //     certStore.Open(OpenFlags.ReadOnly);
@@ -42,7 +42,7 @@ namespace LittleFlowerKalewadi.Server
             // }
 
             // Fallback to local file for development
-            if (cert == null)
+            /* if (cert == null)
             {
                 string path = Path.Combine(Directory.GetCurrentDirectory(), "lfps.pfx");
                 string azPath = Path.Combine("D:", "home", "site", "wwwroot", "wwwroot", "lfps.pfx");
@@ -52,7 +52,7 @@ namespace LittleFlowerKalewadi.Server
                 //string path = Path.Combine(Directory.GetCurrentDirectory(), "lfps.pfx");
                 cert = new X509Certificate2(path, "Up22mlFF");
                 //Log.Logger.Information($"Falling back to cert from file. Successfully loaded: {cert.Thumbprint}");
-            }
+            } */
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
