@@ -3,7 +3,7 @@ version: '3.4'
 
 services:
   web:
-    image: lfk/webapp:stag
+    image: lfk/webapp:stag-v1.0.3
     build:
       context: .
       dockerfile: Server/Dockerfile
