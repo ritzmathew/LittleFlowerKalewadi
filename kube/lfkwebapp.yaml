@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: lfkwebapp
-        image: asia.gcr.io/studied-jigsaw-321716/lfkwebapp:stag-v1.0.3
+        image: asia.gcr.io/studied-jigsaw-321716/lfkwebapp:stag-v1.0.5
         ports:
         - containerPort: 80
 ---
