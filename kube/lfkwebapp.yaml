@@ -14,10 +14,13 @@ spec:
     spec:
       containers:
       - name: lfkwebapp
-        image: ritzmathew/lfk:lfkwebapp-stag-v1.0.6
+        image: ritzmathew/lfk:latest
         env:
         - name: SqlConnectionString
-          value: "Server=lfksqlsrv-service.default.svc,1433;Initial Catalog=school;Persist Security Info=False;User ID=sa;Password=Up22mlFF;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;" 
+          valueFrom:
+            secretKeyRef:
+              name: mssqlcon
+              key: ConnectionString
         ports:
         - containerPort: 80
       imagePullSecrets:
