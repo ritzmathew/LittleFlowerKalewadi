@@ -5,8 +5,7 @@ services:
   web:
     image: lfk/webapp:stag-v1.0.5
     build:
-      context: .
-      dockerfile: Server/Dockerfile
+      context: ./Server
     ports:
       - 4080:80
       - 4443:443
