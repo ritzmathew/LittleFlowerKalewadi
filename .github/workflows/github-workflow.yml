@@ -25,6 +25,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - name: Dockerhub login
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }} 
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }} 
+        run: | 
+          docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+
       # Runs a set of commands using the runners shell
       - name: Docker build lfkwebapp
         run: |
