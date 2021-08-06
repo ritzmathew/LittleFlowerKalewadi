@@ -38,6 +38,7 @@ jobs:
           docker build ./LittleFlowerKalewadi -t lfk/webapp:stag-v1.0.5
 
       # Push image to Docker Hub    
-      - name: Docker build lfkwebapp
+      - name: Docker push lfkwebapp
         run: |
-          docker push lfk/webapp:stag-v1.0.5
+          docker tag lfk/webapp:stag-v1.0.5 $DOCKERHUB_USERNAME/lfk/lfkwebapp:stag-v1.0.5
+          docker push $DOCKERHUB_USERNAME/lfk/lfkwebapp:stag-v1.0.5
