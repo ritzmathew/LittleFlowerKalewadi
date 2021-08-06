@@ -14,7 +14,10 @@ spec:
     spec:
       containers:
       - name: lfkwebapp
-        image: ritzmathew/lfk:lfkwebapp-stag-v1.0.5
+        image: ritzmathew/lfk:lfkwebapp-stag-v1.0.6
+        env:
+        - name: SqlConnectionString
+          value: "Server=lfksqlsrv-service.default.svc,1433;Initial Catalog=school;Persist Security Info=False;User ID=sa;Password=Up22mlFF;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;" 
         ports:
         - containerPort: 80
       imagePullSecrets:
@@ -28,8 +31,6 @@ metadata:
     app: lfkwebapp-service
 spec:
   type: LoadBalancer
-  externalIPs:
-  - 34.93.248.34
   ports:
   - name: http
     port: 80
@@ -39,7 +40,3 @@ spec:
   selector:
     app: lfkwebapp
   sessionAffinity: None
-status:
-  loadBalancer:
-    ingress:
-    - ip: 34.93.248.34
