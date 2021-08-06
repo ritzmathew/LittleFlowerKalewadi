@@ -28,4 +28,4 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Docker build lfkwebapp
         run: |
-          docker build ./LittleFlowerKalewadi/Server -t lfk/webapp:stag-v1.0.5
+          docker build ./LittleFlowerKalewadi -t lfk/webapp:stag-v1.0.5
