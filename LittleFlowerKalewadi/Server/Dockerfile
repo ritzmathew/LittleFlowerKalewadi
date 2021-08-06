@@ -7,7 +7,7 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /src
 COPY ["LittleFlowerKalewadi.Server.csproj", "Server/"]
 RUN dotnet restore "Server/LittleFlowerKalewadi.Server.csproj"
-COPY . .
+COPY "../" "."
 WORKDIR "/src/Server"
 RUN dotnet build "LittleFlowerKalewadi.Server.csproj" -c Release -o /app/build
 
