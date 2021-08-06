@@ -14,9 +14,11 @@ spec:
     spec:
       containers:
       - name: lfkwebapp
-        image: asia.gcr.io/studied-jigsaw-321716/lfkwebapp:stag-v1.0.5
+        image: ritzmathew/lfk:lfkwebapp-stag-v1.0.5
         ports:
         - containerPort: 80
+      imagePullSecrets:
+      - name: regcred
 ---
 apiVersion: v1
 kind: Service
