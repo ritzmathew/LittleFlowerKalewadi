@@ -42,5 +42,5 @@ jobs:
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         run: |
-          docker tag lfk/webapp:stag-v1.0.5 $DOCKERHUB_USERNAME/lfk/lfkwebapp:stag-v1.0.5
-          docker push $DOCKERHUB_USERNAME/lfk/lfkwebapp:stag-v1.0.5
+          docker tag lfk/webapp:stag-v1.0.5 $DOCKERHUB_USERNAME/lfk:lfkwebapp-stag-v1.0.5
+          docker push $DOCKERHUB_USERNAME/lfk:lfkwebapp-stag-v1.0.5
