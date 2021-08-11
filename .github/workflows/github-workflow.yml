@@ -35,12 +35,12 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Docker build lfkwebapp
         run: |
-          docker build ./LittleFlowerKalewadi -t lfk/webapp
+          docker build ./LittleFlowerKalewadi -t lfk/webapp:v1.0.7
 
       # Push image to Docker Hub    
       - name: Docker push lfkwebapp
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         run: |
-          docker tag lfk/webapp $DOCKERHUB_USERNAME/lfk
-          docker push $DOCKERHUB_USERNAME/lfk
+          docker tag lfk/webapp:v1.0.7 $DOCKERHUB_USERNAME/lfk:v1.0.7
+          docker push $DOCKERHUB_USERNAME/lfk:v1.0.7

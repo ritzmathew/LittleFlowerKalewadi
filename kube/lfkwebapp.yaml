@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: lfkwebapp
-        image: ritzmathew/lfk:latest
+        image: ritzmathew/lfk:v1.0.7
         env:
         - name: SqlConnectionString
           valueFrom:
